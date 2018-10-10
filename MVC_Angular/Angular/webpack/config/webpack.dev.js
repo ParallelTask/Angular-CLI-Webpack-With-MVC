@@ -1,0 +1,39 @@
+var merge = require('webpack-merge');
+var UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var common = require('./webpack.common');
+var helper = require('./helper');
+
+module.exports = merge(common, {
+    devtool: 'source-map',
+    devServer: {
+        historyApiFallback: true
+    },
+    output: {
+        filename: '[name].bundle.js',
+        chunkFilename: 'chunks/[name].chunk.js',
+        path: helper.resolveRoot('dist')
+    },
+    module: {
+        rules: [
+            // SASS which include in components
+            {
+                test: /\.scss$/,
+                include: helper.resolveRoot('src/app'),
+                use: ['to-string-loader?sourceMap', 'css-loader?sourceMap', 'sass-loader?sourceMap']
+            },
+            // SASS that does not include components
+            {
+                test: /\.scss$/,
+                include: helper.resolveRoot('src/assets/styles'),
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader?sourceMap',
+                    use: ['css-loader?sourceMap', 'sass-loader?sourceMap']
+                })
+            }
+        ]
+    },
+    plugins: [
+        new ExtractTextPlugin('bundle.css')
+    ]
+});

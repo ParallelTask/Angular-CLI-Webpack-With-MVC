@@ -328,3 +328,9 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
+
+# https://stackoverflow.com/questions/2545602/git-ignore-sub-folders
+**/node_modules
+**/public
+**/dist
+**/package-lock.json

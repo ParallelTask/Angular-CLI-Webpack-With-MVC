@@ -1,0 +1,13 @@
+<h2>About Page:</h2>
+<h3 class="email">{{ email }}</h3>
+<div class="violetcolor">about: this should be violet color</div>
+<div>Observable button clicked times {{ rxClicks }}</div>
+<div>Normal button clicked times {{ nlClicks }}</div>
+<button (ptHackerRxClick)="rxClick($event)">Observable EventClick</button>
+<button (click)="nlClick()">Nomral EventClick</button>
+<br>
+<button (click)="runMe()" class="runMe">RunMe</button>
+<br>
+<button (click)="getCustomer()">GetCustomer(45) - Configured in MOCKHttp</button>
+<button (click)="getCustomerNotFound()">GetCustomer(46) - Not Configured in MOCKHttp</button>
+<div> DataFromHTTP {{ httpData }}</div>
